@@ -1,10 +1,17 @@
 const express =  require("express");
 const app  = express();
 require("dotenv").config();
+const cookieparser = require("cookie-parser");
+const authentication  =  require("./routers/authRouter");
+const connectDB =  require("./config/db");
+
+
 const PORT =  process.env.PORT || 6000;
 
+connectDB();
 
 app.use(express.json());
+app.use(cookieparser());
 
 app.get('/', (req, res)=>{
     res.status(200).json({
@@ -12,6 +19,8 @@ app.get('/', (req, res)=>{
         message:"hello world!"
     });
 })
+
+app.use('/api' , authentication);
 
 
 app.use((req, res,  next)=>{
