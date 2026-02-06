@@ -1,66 +1,97 @@
-# Course Platform Backend API
-A RESTful backend API for a course platform where instructors can create and manage courses, students can purchase courses, and users can access course lessons. Built with Node.js, Express, MongoDB, and JWT-based authentication.
+# 📚 Course Platform Backend API
 
-# Tech Stack
-Node.js – Runtime environment
-Express.js – Web framework
-MongoDB – NoSQL database
-Mongoose – ODM for MongoDB
-JWT (JSON Web Token) – Authentication & Authorization
+A RESTful backend API for a course platform where:
+- Instructors can create and manage courses & lessons  
+- Students can purchase courses and access lessons  
+- Built with Node.js, Express, MongoDB, and JWT authentication
+
+---
+
+##  Tech Stack
+
+- **Node.js** – Runtime environment  
+- **Express.js** – Web framework  
+- **MongoDB** – NoSQL database  
+- **Mongoose** – ODM for MongoDB  
+- **JWT** – Authentication & Authorization  
+
+---
+
+##  Getting Started
+
+### 1️⃣ Clone the Repository
+```bash
+
+git clone https://github.com/Ajay2023/Course-Selling-API.git
+cd backend cd src
+
+```
+
+### 2️⃣ Install Dependencies
+```bash 
+npm install
+```
+
+### 3️⃣ Environment Variables
+
+```bash
+PORT=9000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+NODE_ENV=development
+```
+### 4️⃣ Run the Server
+
+```bash
+npm run dev
+```
+## server runs:
+```
+http://localhost:9000
+```
+
+### Authentication APIs
+
+```bash
+| Method | Endpoint        | Description             | Access  |
+| ------ | --------------- | ----------------------- | ------- |
+| POST   | `/api/register` | Register a new user     | Public  |
+| POST   | `/api/login`    | Login & get JWT token   | Public  |
+| GET    | `/api/me`       | Get logged-in user info | Private |
+
+```
+
+### Course APIs
+```bash
+| Method | Endpoint                | Description         | Access     |
+| ------ | ----------------------- | ------------------- | ---------- |
+| POST   | `/course/create-course` | Create a new course | Tutor only |
+| GET    | `/course/getAllCourses` | Get all courses     | Public     |
+| GET    | `/course/:id`           | Get course by ID    | Public     |
+| PATCH  | `/course/:id`           | Update course       | Tutor only |
+| DELETE | `/course/:id`           | Delete course       | Tutor only |
+```
 
 
-1. Clone the repository
-    git clone  https://github.com/AJAy2023/Course-Selling-API.git
-    cd backend , cd src 
+### Lesson APIs
+```bash
+| Method | Endpoint              | Description                 | Access     |
+| ------ | --------------------- | --------------------------- | ---------- |
+| POST   | `/addlessions/:id`    | Add lesson to a course      | Tutor only |
+| GET    | `/courselessions/:id` | Get all lessons of a course | Public     |
+```
 
-2.  Install dependencies
-     npm install
-3. Environment Variables (.env)
-    PORT=9000
-    MONGO_URI=your_mongodb_connection_string
-    JWT_SECRET=your_jwt_secret
-    NODE_ENV=development
-
-4. Run the server
-    npm run dev
-
-5. Server will start on:
-    http://localhost:9000
-
-# Authentication APIs
-Method	Endpoint	        Description
-POST	/api/register	    Register a new user
-POST	/api/login	         Login user & get token
-GET	    /api/me	              Getlogged-in user info
-    
-
-/api/me requires JWT token in Authorization header
-Authorization: Bearer <token>
-
-# Course APIs
-Method	Endpoint	            Description	Access
-POST	/create-course	        Create a new course	Tutor only
-GET	    /course/getAllCourses	Get all courses	Public
-GET 	/course/:id	Get single  course details	Public
-PATCH	/course/:id	Update a    course	Tutor only
-DELETE	/course/:id	Delete a    course	Tutor only
+### Purchase APIs
+```bash
+| Method | Endpoint                  | Description                       | Access |
+| ------ | ------------------------- | --------------------------------- | ------ |
+| POST   | `/purchase/:id`           | Purchase a course                 | User   |
+| GET    | `/getpurchasecourses/:id` | Get all purchased courses of user | User   |
+```
 
 
-# Lesson APIs
-Method	Endpoint	            Description	Access
-POST	/addlessions/:id	    Add lesson to a course	Tutor only
-GET	    /courselessions/:id	    Get all lessons of a course	Public
 
 
-# Purchase APIs
-Method	Endpoint	        Description	Access
-POST	/purchase/:id	    Purchase a course	User
-GET	/getpurchasecourses/:id	    Get all purchased courses of a user	User
+👨‍💻 Author ❤
+Ajay Jadhav
 
-# Authorization Rules
-Role	    Permissions
-Tutor	    Create, update, delete courses & lessons
-User	    Purchase courses, view purchased courses
-
-Author
-Built with ❤️ by Ajay Jadhav
