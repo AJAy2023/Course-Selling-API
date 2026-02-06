@@ -3,6 +3,9 @@ const app  = express();
 require("dotenv").config();
 const cookieparser = require("cookie-parser");
 const authentication  =  require("./routers/authRouter");
+const course =  require("./routers/courseRoute");
+const lession = require("./routers/lessionRouter");
+const purchase =  require("./routers/purchaseRouter");
 const connectDB =  require("./config/db");
 
 
@@ -21,7 +24,9 @@ app.get('/', (req, res)=>{
 })
 
 app.use('/api' , authentication);
-
+app.use('/api', course);
+app.use('/api',lession);
+app.use('/api', purchase);
 
 app.use((req, res,  next)=>{
     const error = new Error("route not  found");

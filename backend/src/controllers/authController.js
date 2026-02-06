@@ -7,7 +7,6 @@ const register =  async (req, res)=>{
     try
     {
         const {username,  email, password} = req.body;
-       // validation  
         if(!username ||  !email || !password)
         {
             return res.status(400).json({
@@ -15,15 +14,13 @@ const register =  async (req, res)=>{
                 message:"Add the required fields"
             });
         }
-        // email validator 
         if(!validator.validate(email))
         {
             return res.status(400).json({
                 success:false,
                 message:"Enter correct email formate"
             });
-        }
-        // check the  user exist or  not  
+        } 
         const  user =  await User.findOne({email});
         if(user)
         {
@@ -32,9 +29,7 @@ const register =  async (req, res)=>{
                 message:"Email id  already exist. Please  do  login"
             });
         }
-        //  if  not then  
         const hashpassword  =  await bcrypt.hash(password , 10);
-        // create the  user  
         const newUser =  await User.create({
             username,
             email,
